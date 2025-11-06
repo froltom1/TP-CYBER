@@ -6,21 +6,13 @@ echo "════════════════════════�
 echo "     🧹 NETTOYAGE COMPLET DE TOUS LES TP"
 echo "═══════════════════════════════════════════════════"
 echo ""
-echo "⚠️  Ce script va supprimer :"
+echo "Ce script va supprimer :"
 echo "   - TP1 : /var/www/monsite"
 echo "   - TP3 : Utilisateur 'hacker' et /tmp/.hidden"
 echo "   - CTF : Utilisateurs alice, mallory, /opt/webapp, /var/ctf"
 echo ""
-read -p "Voulez-vous continuer ? (y/N) : " -n 1 -r
-echo ""
-
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "❌ Annulé"
-    exit 1
-fi
-
-echo ""
-echo "Début du nettoyage..."
+echo "Début du nettoyage dans 3 secondes..."
+sleep 3
 echo ""
 
 # ════════════════════════════════════════
@@ -66,27 +58,21 @@ fi
 echo ""
 
 # ════════════════════════════════════════
-# NETTOYAGE CTF : CHALLENGE 1 (alice)
+# NETTOYAGE CTF : CHALLENGES
 # ════════════════════════════════════════
-echo "[3/4] 🗑️  Nettoyage CTF - Challenge 1 (alice)"
+echo "[3/4] 🗑️  Nettoyage CTF - Tous les challenges"
 
+# Challenge 1 : alice
 if id "alice" &>/dev/null; then
-    # Arrêter les processus d'alice
     pkill -u alice 2>/dev/null
     sleep 1
-    
-    # Supprimer l'utilisateur
     userdel -r alice 2>/dev/null
     echo "   ✅ Utilisateur 'alice' supprimé"
 else
     echo "   ℹ️  Utilisateur 'alice' n'existe pas"
 fi
 
-# ════════════════════════════════════════
-# NETTOYAGE CTF : CHALLENGE 2 (config)
-# ════════════════════════════════════════
-echo "[3/4] 🗑️  Nettoyage CTF - Challenge 2 (config)"
-
+# Challenge 2 : /opt/webapp
 if [ -d /opt/webapp ]; then
     rm -rf /opt/webapp
     echo "   ✅ /opt/webapp supprimé"
@@ -94,31 +80,18 @@ else
     echo "   ℹ️  /opt/webapp n'existe pas"
 fi
 
-# ════════════════════════════════════════
-# NETTOYAGE CTF : CHALLENGE 3 (mallory)
-# ════════════════════════════════════════
-echo "[3/4] 🗑️  Nettoyage CTF - Challenge 3 (mallory)"
-
+# Challenge 3 : mallory
 if id "mallory" &>/dev/null; then
-    # Arrêter les processus de mallory
     pkill -u mallory 2>/dev/null
     sleep 1
-    
-    # Supprimer le crontab de mallory
     crontab -u mallory -r 2>/dev/null
-    
-    # Supprimer l'utilisateur
     userdel -r mallory 2>/dev/null
     echo "   ✅ Utilisateur 'mallory' supprimé"
 else
     echo "   ℹ️  Utilisateur 'mallory' n'existe pas"
 fi
 
-# ════════════════════════════════════════
-# NETTOYAGE CTF : CHALLENGE 4 (crypto)
-# ════════════════════════════════════════
-echo "[4/4] 🗑️  Nettoyage CTF - Challenge 4 (crypto)"
-
+# Challenge 4 : /var/ctf
 if [ -d /var/ctf ]; then
     rm -rf /var/ctf
     echo "   ✅ /var/ctf supprimé"
@@ -129,25 +102,19 @@ fi
 echo ""
 
 # ════════════════════════════════════════
-# NETTOYAGE DES LOGS (optionnel)
+# NETTOYAGE DES LOGS
 # ════════════════════════════════════════
-echo "🧹 Nettoyage des logs suspects (optionnel)"
-read -p "Voulez-vous aussi nettoyer les logs d'auth.log ? (y/N) : " -n 1 -r
-echo ""
+echo "[4/4] 🗑️  Nettoyage des logs suspects"
 
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    # Sauvegarder auth.log
-    cp /var/log/auth.log /var/log/auth.log.backup
-    
-    # Supprimer les lignes contenant hacker, alice, mallory
-    sed -i '/hacker/d' /var/log/auth.log
-    sed -i '/alice/d' /var/log/auth.log
-    sed -i '/mallory/d' /var/log/auth.log
-    
-    echo "   ✅ Logs nettoyés (backup : /var/log/auth.log.backup)"
-else
-    echo "   ℹ️  Logs conservés"
-fi
+# Sauvegarder auth.log
+cp /var/log/auth.log /var/log/auth.log.backup 2>/dev/null
+
+# Supprimer les lignes contenant hacker, alice, mallory
+sed -i '/hacker/d' /var/log/auth.log 2>/dev/null
+sed -i '/alice/d' /var/log/auth.log 2>/dev/null
+sed -i '/mallory/d' /var/log/auth.log 2>/dev/null
+
+echo "   ✅ Logs nettoyés (backup : /var/log/auth.log.backup)"
 
 echo ""
 
