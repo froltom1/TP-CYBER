@@ -1,2 +1,16 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Normaliser les scripts shell et fichiers texte importants en LF
+*.sh   text eol=lf
+*.py   text eol=lf
+*.pl   text eol=lf
+*.rb   text eol=lf
+*.js   text eol=lf
+*.go   text eol=lf
+*.ps1  text eol=crlf    # si tu veux garder CRLF pour PowerShell
+*.bat  text eol=crlf
+*.md   text eol=lf
+*.txt  text eol=lf
+
+# Eviter de toucher aux binaires
+*.png  binary
+*.jpg  binary
+*.zip  binary
