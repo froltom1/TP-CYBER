@@ -12,7 +12,6 @@ echo "   - TP3 : Utilisateur 'hacker' et /tmp/.hidden"
 echo "   - CTF : Utilisateurs alice, mallory, /opt/webapp, /var/ctf"
 echo ""
 echo "Début du nettoyage dans 3 secondes..."
-sleep 3
 echo ""
 
 # ════════════════════════════════════════
