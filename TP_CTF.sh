@@ -107,7 +107,7 @@ mkdir -p /var/ctf
 # Créer le message chiffré
 # Message original : "FLAG{crypt0_m4st3r_unlocked}"
 # Chiffré avec : echo "FLAG{crypt0_m4st3r_unlocked}" | openssl enc -aes-256-cbc -salt -k cyb3rs3cur1ty -base64
-echo "U2FsdGVkX19wvXGoE9x3xNb8YZ0FHXhJqK+Qa3vP2Tg=" > /var/ctf/encrypted_message.txt
+echo "FLAG{crypt0_m4st3r_unlocked}" | openssl enc -aes-256-cbc -salt -k cyb3rs3cur1ty -base64 > /var/ctf/encrypted_message.txt
 
 # Créer le fichier d'indices
 cat > /var/ctf/hint.txt <<'EOF'
