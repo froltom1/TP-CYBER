@@ -4,7 +4,7 @@
 set -e
 
 WEBGOAT_VERSION="2023.4"
-WEBGOAT_JAR="webgoat-server-${WEBGOAT_VERSION}.jar"
+WEBGOAT_JAR="webgoat-${WEBGOAT_VERSION}.jar"
 WEBGOAT_URL="https://github.com/WebGoat/WebGoat/releases/download/v${WEBGOAT_VERSION}/${WEBGOAT_JAR}"
 INSTALL_DIR="/opt/webgoat"
 WG_USER="webgoat"
