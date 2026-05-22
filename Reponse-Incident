@@ -411,28 +411,11 @@ history -c
 ok "Historiques effacés"
 
 # ═══════════════════════════════════════════════════════════════════════════
-# RÉSUMÉ FORMATEUR
+# FIN
 # ═══════════════════════════════════════════════════════════════════════════
-echo -e "\n${BOLD}${GREEN}╔══════════════════════════════════════════════════════════╗"
-echo -e "║         VM VICTIM-S5 PRÊTE — Debian ${DEBIAN_VERSION}                  ║"
-echo -e "╠══════════════════════════════════════════════════════════╣"
-echo -e "║  CREDENTIALS                                             ║"
-echo -e "║  analyst    / Lab2024!       (SSH)                       ║"
-echo -e "║  root       / Root2024!      (su)                        ║"
-echo -e "║  svc_backup / B4ckup@2024    (BACKDOOR UID=0)            ║"
-echo -e "╠══════════════════════════════════════════════════════════╣"
-echo -e "║  ARTEFACTS PLANTÉS                                       ║"
-echo -e "║  Webshell   : uploads/img_20241103.php (base64)          ║"
-echo -e "║  Webshell 2 : uploads/.htaccess_bak (bonus)              ║"
-echo -e "║  Crontab    : /etc/cron.d/sys-monitor                    ║"
-echo -e "║  Backdoor   : compte svc_backup (UID=0)                  ║"
-echo -e "║  Processus  : visible dans ps auxf (bash loop)           ║"
-echo -e "╠══════════════════════════════════════════════════════════╣"
-echo -e "║  FIREWALL : backend = ${FW_BACKEND}                             ║"
-echo -e "║  Script confinement : /usr/local/bin/confine-attacker.sh ║"
-echo -e "╠══════════════════════════════════════════════════════════╣"
-echo -e "║  RÉSEAU : configurer port forwarding sur l'hyperviseur   ║"
-echo -e "║  SSH  hôte:2222 → VM:22   |   HTTP hôte:8080 → VM:80    ║"
-echo -e "╠══════════════════════════════════════════════════════════╣"
-echo -e "║  => FAIRE UN SNAPSHOT MAINTENANT : 'victim-s5-ready-TP' ║"
-echo -e "╚══════════════════════════════════════════════════════════╝${NC}\n"
+
+# On efface l'écran pour ne pas laisser de traces visibles
+clear
+
+echo -e "\n${GREEN}${BOLD}[+] Environnement configuré avec succès.${NC}"
+echo -e "${GREY}    Vous pouvez fermer ce terminal et démarrer le TP.${NC}\n"
