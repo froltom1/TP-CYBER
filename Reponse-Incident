@@ -69,11 +69,8 @@ fi
 step "Création des comptes utilisateurs"
 
 id "analyst" &>/dev/null || /usr/sbin/useradd -m -s /bin/bash analyst
-echo "analyst:Lab2024!" | /usr/sbin/chpasswd
-ok "Compte analyst (mdp: Lab2024!)"
-
-echo "root:Root2024!" | /usr/sbin/chpasswd
-ok "Mot de passe root (Root2024!)"
+passwd -l analyst >> "$LOG" 2>&1
+ok "Compte analyst planté (compte verrouillé — artefact TP)"
 
 # Compte backdoor UID=0 planté par l'attaquant
 id "svc_backup" &>/dev/null || /usr/sbin/useradd -o -u 0 -g 0 -s /bin/bash -d /var/backups svc_backup
@@ -420,8 +417,8 @@ clear
 
 if [[ $ERRORS -eq 0 ]]; then
     echo -e "\n${GREEN}${BOLD}[+] Environnement configuré avec succès — aucune erreur.${NC}"
-    echo -e "${GREY}    Vous pouvez fermer ce terminal et démarrer le TP.${NC}\n"
+    echo -e "${NC}    Vous pouvez fermer ce terminal et démarrer le TP.${NC}\n"
 else
     echo -e "\n${YELLOW}${BOLD}[!] Configuration terminée avec ${ERRORS} erreur(s).${NC}"
-    echo -e "${GREY}    Consultez le log pour le détail : /var/log/prepare-victim-s5.log${NC}\n"
+    echo -e "${NC}    Consultez le log pour le détail : /var/log/prepare-victim-s5.log${NC}\n"
 fi
