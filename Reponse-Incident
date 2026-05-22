@@ -43,7 +43,7 @@ step "Installation des paquets (Debian ${DEBIAN_VERSION})"
 apt-get update -qq >> "$LOG" 2>&1
 
 # Paquets communs aux deux versions
-PKGS="apache2 php php-cli libapache2-mod-php openssh-server curl wget python3 perl iproute2"
+PKGS="apache2 php php-cli libapache2-mod-php openssh-server curl wget python3 perl iproute2 passwd"
 
 # net-tools : disponible sur les deux mais inutile — on ne l'installe pas
 # iptables : sur Debian 12, c'est iptables-nft ; sur Debian 13, on préfère nftables natif
@@ -67,16 +67,16 @@ fi
 # ═══════════════════════════════════════════════════════════════════════════
 step "Création des comptes utilisateurs"
 
-id "analyst" &>/dev/null || useradd -m -s /bin/bash analyst
-echo "analyst:Lab2024!" | chpasswd
+id "analyst" &>/dev/null || /usr/sbin/useradd -m -s /bin/bash analyst
+echo "analyst:Lab2024!" | /usr/sbin/chpasswd
 ok "Compte analyst (mdp: Lab2024!)"
 
-echo "root:Root2024!" | chpasswd
+echo "root:Root2024!" | /usr/sbin/chpasswd
 ok "Mot de passe root (Root2024!)"
 
 # Compte backdoor UID=0 planté par l'attaquant
-id "svc_backup" &>/dev/null || useradd -o -u 0 -g 0 -s /bin/bash -d /var/backups svc_backup
-echo "svc_backup:B4ckup@2024" | chpasswd
+id "svc_backup" &>/dev/null || /usr/sbin/useradd -o -u 0 -g 0 -s /bin/bash -d /var/backups svc_backup
+echo "svc_backup:B4ckup@2024" | /usr/sbin/chpasswd
 ok "Compte backdoor 'svc_backup' (UID=0) planté"
 
 echo "analyst ALL=(ALL) NOPASSWD: /usr/bin/python3, /bin/bash" > /etc/sudoers.d/analyst
