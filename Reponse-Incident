@@ -11,7 +11,7 @@
 # TEMPS D'EXÉCUTION : ~4-6 min selon la connexion internet
 # =============================================================================
 
-set -euo pipefail
+set -eo pipefail
 LOG="/var/log/prepare-victim-s5.log"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
